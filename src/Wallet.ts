@@ -1,11 +1,11 @@
 import Client from './Client';
 
 export enum TransactionStatus {
-  NORMAL = 0,
-  LOCKED = 1,
-  PENDING = 2,
-  CANCELLED = 3,
-  SPENT = 4,
+  NORMAL = 'normal',
+  LOCKED = 'locked',
+  PENDING = 'pending',
+  CANCELLED = 'cancelled',
+  SPENT = 'spent',
 }
 
 export interface Balance {

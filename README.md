@@ -49,8 +49,7 @@ Response example:
     "amount": "-101",
     "unlockTime": 0,
     "status": "normal"
-  },
-  ...
+  }
 ]
 ```
 
@@ -88,9 +87,9 @@ await client.info.all();
 Response example:
 ```json
 {
-    lastSyncedHeight: 83264,
-    currentHeight: 83264,
-    lastUpdated: 1526282907815
+  "lastSyncedHeight": 83264,
+  "currentHeight": 83264,
+  "lastUpdated": 1526282907815
 }
 ```
 
