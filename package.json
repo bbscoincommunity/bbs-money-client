@@ -1,0 +1,41 @@
+{
+  "name": "bbs-money-client",
+  "version": "1.0.0",
+  "description": "A node.js client for BBS.money",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "clean": "rm -rf ./dist",
+    "build": "yarn clean && tsc",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:bbscoin/bbs-money-client.git"
+  },
+  "author": "BBSCoin Developers",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bbscoin/bbs-money-client/issues"
+  },
+  "homepage": "https://github.com/bbscoin/bbs-money-client#readme",
+  "jest": {
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    },
+    "testMatch": ["<rootDir>/tests/**/*-test.ts"],
+    "moduleFileExtensions": ["js", "jsx", "json", "ts", "tsx"]
+  },
+  "devDependencies": {
+    "@types/jest": "^22.2.3",
+    "@types/request-promise-native": "^1.0.14",
+    "jest": "^22.4.3",
+    "ts-jest": "^22.4.6",
+    "typescript": "^2.8.3",
+    "typings": "^2.1.1"
+  },
+  "dependencies": {
+    "request": "^2.85.0",
+    "request-promise-native": "^1.0.5"
+  }
+}
