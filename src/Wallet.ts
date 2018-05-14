@@ -1,4 +1,4 @@
-import Client from './Client';
+import { Client } from './Client';
 
 export enum TransactionStatus {
   NORMAL = 'normal',
@@ -40,7 +40,7 @@ export interface TransactionDetails extends Transaction {
   destinations: Destination[];
 }
 
-export default class WalletClient {
+export class Wallet {
   private client: Client;
 
   constructor(client: Client) {
@@ -57,20 +57,16 @@ export default class WalletClient {
       '/api/wallet/transaction-details',
       {
         hash,
-      },
+      }
     )).data;
   }
 
   public async getTransactions(offset: number = 0, limit: number = 10): Promise<Transaction[]> {
-    const response: any = (await this.client.request(
-      'POST',
-      '/api/wallet/transactions',
-      {
-        offset,
-        limit
-      },
-    )).data;
+    const response: any = (await this.client.request('POST', '/api/wallet/transactions', {
+      offset,
+      limit,
+    })).data;
 
-    return <Transaction[]> response.transactions;
+    return <Transaction[]>response.transactions;
   }
 }

@@ -7,10 +7,13 @@ npm install bbs-money-client --save
 
 # Usage
 ```js
-const BBSMoneyClient = require('bbs-money-client');
+const { Client: BBSMoneyClient } = require('bbs-money-client');
 
 const client = new BBSMoneyClient({ appId: "...", appKey: "..." });
-console.log(await client.wallet.getBalance());
+
+client.wallet.getBalance().then(data => {
+    console.log(data);
+})
 ```
 
 # Supported APIs

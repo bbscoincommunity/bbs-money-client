@@ -2,8 +2,8 @@
   "name": "bbs-money-client",
   "version": "1.0.0",
   "description": "A node.js client for BBS.money",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/Client.js",
+  "types": "./dist/Client.d.ts",
   "scripts": {
     "clean": "rm -rf ./dist",
     "build": "yarn clean && tsc",
@@ -23,7 +23,7 @@
     "transform": {
       "^.+\\.ts$": "ts-jest"
     },
-    "testMatch": ["<rootDir>/tests/**/*-test.ts"],
+    "testMatch": ["<rootDir>/test/**/*-test.ts"],
     "moduleFileExtensions": ["js", "jsx", "json", "ts", "tsx"]
   },
   "devDependencies": {

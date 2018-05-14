@@ -1,10 +1,16 @@
-import Client from "../Client";
+import { Client } from './Client';
 export declare enum TransactionStatus {
-    NORMAL = 0,
-    LOCKED = 1,
-    PENDING = 2,
-    CANCELLED = 3,
-    SPENT = 4,
+    NORMAL = "normal",
+    LOCKED = "locked",
+    PENDING = "pending",
+    CANCELLED = "cancelled",
+    SPENT = "spent",
+}
+export interface Balance {
+    address: string;
+    available: string;
+    locked: string;
+    total: string;
 }
 export interface Destination {
     address: string;
@@ -18,7 +24,7 @@ export interface Transaction {
     out: string;
     fee: string;
     fusion: boolean;
-    amonut: string;
+    amount: string;
     unlockTime: number;
     status: TransactionStatus;
 }
@@ -28,10 +34,10 @@ export interface TransactionDetails extends Transaction {
     paymentId: string;
     destinations: Destination[];
 }
-export default class WalletClient {
+export declare class Wallet {
     private client;
     constructor(client: Client);
-    getBalance(): string;
-    getTransactionDetails(hash: string): TransactionDetails | null;
-    getTransactions(offset?: number, limit?: number): Transaction[];
+    getBalance(): Promise<Balance>;
+    getTransactionDetails(hash: string): Promise<TransactionDetails>;
+    getTransactions(offset?: number, limit?: number): Promise<Transaction[]>;
 }

@@ -1,7 +1,7 @@
 import * as rq from 'request-promise-native';
 import * as crypto from 'crypto';
-import Wallet from './Wallet';
-import Info from './Info';
+import { Wallet } from './Wallet';
+import { Info } from './Info';
 
 export interface ClientConfiguration {
   appId: string;
@@ -21,7 +21,7 @@ export interface ErrorResponse extends Response {
   message: string;
 }
 
-class Client {
+export class Client {
   public static readonly HOST = 'https://bbs.money';
   public wallet: Wallet;
   public info: Info;
@@ -83,5 +83,3 @@ class Client {
     return <SuccessResponse>response;
   }
 }
-
-export default Client;
