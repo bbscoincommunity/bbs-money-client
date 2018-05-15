@@ -33,14 +33,21 @@ class Client {
                 const sign = this.getSignature(serialized, timestamp);
                 url = `${url}?appid=${this.appId}&sign=${sign}&ts=${timestamp}`;
             }
-            const raw = yield rq({
-                method,
-                url,
-                body: serialized,
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
+            let raw;
+            try {
+                raw = yield rq({
+                    method,
+                    url,
+                    body: serialized,
+                    timeout: 30 * 1000,
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+            }
+            catch (e) {
+                raw = e.error;
+            }
             let response;
             try {
                 response = JSON.parse(raw);

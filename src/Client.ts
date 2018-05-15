@@ -58,14 +58,20 @@ export class Client {
       url = `${url}?appid=${this.appId}&sign=${sign}&ts=${timestamp}`;
     }
 
-    const raw = await rq({
-      method,
-      url,
-      body: serialized,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    let raw;
+    try {
+      raw = await rq({
+        method,
+        url,
+        body: serialized,
+        timeout: 30 * 1000,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+    } catch (e) {
+      raw = e.error;
+    }
 
     let response;
     try {

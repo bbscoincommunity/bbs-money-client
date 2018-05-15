@@ -41,5 +41,21 @@ class Wallet {
             return response.transactions;
         });
     }
+    send(destinationAddress, amount, fee, paymentId = '', mixin = 0) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = (yield this.client.request('POST', '/api/wallet/send', {
+                mixin,
+                fee,
+                paymentId,
+                transfers: [
+                    {
+                        address: destinationAddress,
+                        amount
+                    }
+                ]
+            })).data;
+            return response.hash;
+        });
+    }
 }
 exports.Wallet = Wallet;

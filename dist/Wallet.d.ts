@@ -40,4 +40,5 @@ export declare class Wallet {
     getBalance(): Promise<Balance>;
     getTransactionDetails(hash: string): Promise<TransactionDetails>;
     getTransactions(offset?: number, limit?: number): Promise<Transaction[]>;
+    send(destinationAddress: string, amount: string, fee: string, paymentId?: string, mixin?: number): Promise<string>;
 }

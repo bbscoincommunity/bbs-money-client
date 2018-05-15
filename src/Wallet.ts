@@ -69,4 +69,20 @@ export class Wallet {
 
     return <Transaction[]>response.transactions;
   }
+
+  public async send(destinationAddress: string, amount: string, fee: string, paymentId: string = '', mixin: number = 0): Promise<string> {
+    const response: any = (await this.client.request('POST', '/api/wallet/send', {
+      mixin,
+      fee,
+      paymentId,
+      transfers: [
+        {
+          address: destinationAddress,
+          amount
+        }
+      ]
+    })).data;
+
+    return <string>response.hash;
+  }
 }

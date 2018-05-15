@@ -82,6 +82,16 @@ Response example:
 }
 ```
 
+### Send
+```js
+await client.wallet.send('fySYVoeryY4WZmM6vpduKBccALWaLukXfQ6KwsFgg8pR8HhjHw3AeCiDrXfqEPSYnkgbK74CRBat9YETn8qwj7aN23TMRqiTh', '0.00000001', '0.001');
+```
+Response example:
+```json
+"de0c8a26bf6a12d8769ae5e23a1ab0c05e605de6c9645294e490e5bba3f0afdd"
+```
+
+
 ## System information
 ### Getting system synchronization status
 ```js
@@ -102,5 +112,5 @@ await client.info.supply();
 ```
 Response example:
 ```json
-40675615400.2547
+"40675615400.2547"
 ```
