@@ -13,7 +13,7 @@ const client = new BBSMoneyClient({ appId: "...", appKey: "..." });
 
 client.wallet.getBalance().then(data => {
     console.log(data);
-})
+});
 ```
 
 # Supported APIs

@@ -14,12 +14,12 @@ class Info {
     }
     all() {
         return __awaiter(this, void 0, void 0, function* () {
-            return (yield this.client.request('POST', '/api/info/all', null, false)).data;
+            return (yield this.client.request('POST', '/info/all', null, false)).data;
         });
     }
     supply() {
         return __awaiter(this, void 0, void 0, function* () {
-            return (yield this.client.request('GET', '/api/info/supply', null, false)).data;
+            return (yield this.client.request('GET', '/info/supply', null, false)).data;
         });
     }
 }

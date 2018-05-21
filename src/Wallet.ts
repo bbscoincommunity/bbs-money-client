@@ -48,13 +48,13 @@ export class Wallet {
   }
 
   public async getBalance(): Promise<Balance> {
-    return <Balance>(await this.client.request('POST', '/api/wallet/balance')).data;
+    return <Balance>(await this.client.request('POST', '/wallet/balance')).data;
   }
 
   public async getTransactionDetails(hash: string): Promise<TransactionDetails> {
     return <TransactionDetails>(await this.client.request(
       'POST',
-      '/api/wallet/transaction-details',
+      '/wallet/transaction-details',
       {
         hash,
       }
@@ -62,7 +62,7 @@ export class Wallet {
   }
 
   public async getTransactions(offset: number = 0, limit: number = 10): Promise<Transaction[]> {
-    const response: any = (await this.client.request('POST', '/api/wallet/transactions', {
+    const response: any = (await this.client.request('POST', '/wallet/transactions', {
       offset,
       limit,
     })).data;
@@ -71,7 +71,7 @@ export class Wallet {
   }
 
   public async send(destinationAddress: string, amount: string, fee: string, paymentId: string = '', mixin: number = 0): Promise<string> {
-    const response: any = (await this.client.request('POST', '/api/wallet/send', {
+    const response: any = (await this.client.request('POST', '/wallet/send', {
       mixin,
       fee,
       paymentId,

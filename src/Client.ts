@@ -22,7 +22,7 @@ export interface ErrorResponse extends Response {
 }
 
 export class Client {
-  public static readonly HOST = 'https://bbs.money';
+  public static readonly HOST = 'https://api.bbs.money';
   public wallet: Wallet;
   public info: Info;
 

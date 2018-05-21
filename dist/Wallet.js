@@ -22,19 +22,19 @@ class Wallet {
     }
     getBalance() {
         return __awaiter(this, void 0, void 0, function* () {
-            return (yield this.client.request('POST', '/api/wallet/balance')).data;
+            return (yield this.client.request('POST', '/wallet/balance')).data;
         });
     }
     getTransactionDetails(hash) {
         return __awaiter(this, void 0, void 0, function* () {
-            return (yield this.client.request('POST', '/api/wallet/transaction-details', {
+            return (yield this.client.request('POST', '/wallet/transaction-details', {
                 hash,
             })).data;
         });
     }
     getTransactions(offset = 0, limit = 10) {
         return __awaiter(this, void 0, void 0, function* () {
-            const response = (yield this.client.request('POST', '/api/wallet/transactions', {
+            const response = (yield this.client.request('POST', '/wallet/transactions', {
                 offset,
                 limit,
             })).data;
@@ -43,7 +43,7 @@ class Wallet {
     }
     send(destinationAddress, amount, fee, paymentId = '', mixin = 0) {
         return __awaiter(this, void 0, void 0, function* () {
-            const response = (yield this.client.request('POST', '/api/wallet/send', {
+            const response = (yield this.client.request('POST', '/wallet/send', {
                 mixin,
                 fee,
                 paymentId,

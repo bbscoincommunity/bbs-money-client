@@ -4,8 +4,8 @@ let client: Client;
 
 beforeAll(() => {
     client = new Client({
-        "appId": "4f9605f0cc5d4a202675635441b87b",
-        "appKey": "a4f15708cf5d957d8f5c5825fca58ad7830d0fb65c67643fc3"
+        "appId": "8a013399d6b1ac7c0ab6cb3b7db9bc",
+        "appKey": "dd6412645fe247d7961367a7cae2781a7284ca21b23424036e"
     });
 });
 

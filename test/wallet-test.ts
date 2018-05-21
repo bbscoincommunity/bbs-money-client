@@ -4,17 +4,17 @@ let client: Client;
 
 beforeAll(() => {
     client = new Client({
-        "appId": "4f9605f0cc5d4a202675635441b87b",
-        "appKey": "a4f15708cf5d957d8f5c5825fca58ad7830d0fb65c67643fc3"
+        "appId": "8a013399d6b1ac7c0ab6cb3b7db9bc",
+        "appKey": "dd6412645fe247d7961367a7cae2781a7284ca21b23424036e"
     });
 });
 
 it('should get balance', async () => {
     const { address, available, locked, total  } = await client.wallet.getBalance();
     expect(address).toBe('fySYVoeryY4WZmM6vpduKBccALWaLukXfQ6KwsFgg8pR8HhjHw3AeCiDrXfqEPSYnkgbK74CRBat9YETn8qwj7aN23TMRqiTh');
-    expect(available).toBe('0');
-    expect(locked).toBe('0');
-    expect(total).toBe('0');
+    expect(available).toBeDefined();
+    expect(locked).toBeDefined();
+    expect(total).toBeDefined();
 });
 
 it('should get transactions', async () => {    

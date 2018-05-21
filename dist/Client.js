@@ -63,5 +63,5 @@ class Client {
         });
     }
 }
-Client.HOST = 'https://bbs.money';
+Client.HOST = 'https://api.bbs.money';
 exports.Client = Client;

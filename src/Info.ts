@@ -14,10 +14,10 @@ export class Info {
   }
 
   public async all(): Promise<SystemInfo> {
-    return <SystemInfo>(await this.client.request('POST', '/api/info/all', null, false)).data;
+    return <SystemInfo>(await this.client.request('POST', '/info/all', null, false)).data;
   }
 
   public async supply(): Promise<string> {
-    return <string>(await this.client.request('GET', '/api/info/supply', null, false)).data;
+    return <string>(await this.client.request('GET', '/info/supply', null, false)).data;
   }
 }
