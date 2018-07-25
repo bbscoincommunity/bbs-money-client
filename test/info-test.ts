@@ -1,12 +1,10 @@
+import * as config from './test-config';
 import { Client } from '../src/Client';
 
 let client: Client;
 
 beforeAll(() => {
-    client = new Client({
-        "appId": "8a013399d6b1ac7c0ab6cb3b7db9bc",
-        "appKey": "dd6412645fe247d7961367a7cae2781a7284ca21b23424036e"
-    });
+    client = new Client(config);
 });
 
 it('should get system information', async () => {

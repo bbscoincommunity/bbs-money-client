@@ -2,8 +2,10 @@ import * as rq from 'request-promise-native';
 import * as crypto from 'crypto';
 import { Wallet } from './Wallet';
 import { Info } from './Info';
+import { Webhook } from './Webhook';
 
 export interface ClientConfiguration {
+  host?: string;
   appId: string;
   appKey: string;
 }
@@ -22,20 +24,23 @@ export interface ErrorResponse extends Response {
 }
 
 export class Client {
-  public static readonly HOST = 'https://api.bbs.money';
   public wallet: Wallet;
   public info: Info;
+  public webhook: Webhook;
 
+  private host: string;
   private appId: string;
   private appKey: string;
 
   constructor(config: ClientConfiguration) {
+    this.host = config.host || 'https://api.bbs.money';
     this.appId = config.appId;
     this.appKey = config.appKey;
 
     // clients
     this.wallet = new Wallet(this);
     this.info = new Info(this);
+    this.webhook = new Webhook(this);
   }
 
   private getSignature(data: string, timestamp: string): string {
@@ -50,7 +55,7 @@ export class Client {
     authentication: boolean = true
   ): Promise<SuccessResponse> {
     let serialized = data ? JSON.stringify(data) : '';
-    let url = `${Client.HOST}${uri}`;
+    let url = `${this.host}${uri}`;
 
     if (authentication) {
       const timestamp = String(Number(new Date()));
@@ -59,6 +64,7 @@ export class Client {
     }
 
     let raw;
+    let success = true;
     try {
       raw = await rq({
         method,
@@ -71,15 +77,20 @@ export class Client {
       });
     } catch (e) {
       raw = e.error;
+      success = false;
     }
 
     let response;
     try {
       response = JSON.parse(raw);
-    } catch (e) {}
+    } catch (e) {
+      response = raw;
+    }
 
     if (typeof response !== 'object') {
-      response = { success: true, data: response };
+      response = success ? 
+        { success, data: response } : 
+        { success, message: response };
     }
 
     if (!response.success) {

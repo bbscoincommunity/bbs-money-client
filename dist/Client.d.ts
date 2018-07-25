@@ -1,6 +1,8 @@
 import { Wallet } from './Wallet';
 import { Info } from './Info';
+import { Webhook } from './Webhook';
 export interface ClientConfiguration {
+    host?: string;
     appId: string;
     appKey: string;
 }
@@ -15,9 +17,10 @@ export interface ErrorResponse extends Response {
     message: string;
 }
 export declare class Client {
-    static readonly HOST: string;
     wallet: Wallet;
     info: Info;
+    webhook: Webhook;
+    private host;
     private appId;
     private appKey;
     constructor(config: ClientConfiguration);

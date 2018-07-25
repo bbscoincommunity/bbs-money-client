@@ -12,13 +12,16 @@ const rq = require("request-promise-native");
 const crypto = require("crypto");
 const Wallet_1 = require("./Wallet");
 const Info_1 = require("./Info");
+const Webhook_1 = require("./Webhook");
 class Client {
     constructor(config) {
+        this.host = config.host || 'https://api.bbs.money';
         this.appId = config.appId;
         this.appKey = config.appKey;
         // clients
         this.wallet = new Wallet_1.Wallet(this);
         this.info = new Info_1.Info(this);
+        this.webhook = new Webhook_1.Webhook(this);
     }
     getSignature(data, timestamp) {
         const hmac = crypto.createHmac('sha256', this.appKey);
@@ -27,13 +30,14 @@ class Client {
     request(method, uri, data = null, authentication = true) {
         return __awaiter(this, void 0, void 0, function* () {
             let serialized = data ? JSON.stringify(data) : '';
-            let url = `${Client.HOST}${uri}`;
+            let url = `${this.host}${uri}`;
             if (authentication) {
                 const timestamp = String(Number(new Date()));
                 const sign = this.getSignature(serialized, timestamp);
                 url = `${url}?appid=${this.appId}&sign=${sign}&ts=${timestamp}`;
             }
             let raw;
+            let success = true;
             try {
                 raw = yield rq({
                     method,
@@ -47,14 +51,19 @@ class Client {
             }
             catch (e) {
                 raw = e.error;
+                success = false;
             }
             let response;
             try {
                 response = JSON.parse(raw);
             }
-            catch (e) { }
+            catch (e) {
+                response = raw;
+            }
             if (typeof response !== 'object') {
-                response = { success: true, data: response };
+                response = success ?
+                    { success, data: response } :
+                    { success, message: response };
             }
             if (!response.success) {
                 throw new Error(response.message);
@@ -63,5 +72,4 @@ class Client {
         });
     }
 }
-Client.HOST = 'https://api.bbs.money';
 exports.Client = Client;
