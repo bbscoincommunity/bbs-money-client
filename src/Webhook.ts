@@ -1,5 +1,13 @@
 import { Client } from './Client';
 
+export interface WebhookResponse {
+  id: string,
+  action: string,
+  params: string[],
+  result?: string,
+  lastCall?: Date
+}
+
 export interface WebhookCreationResponse {
   webhookId: string;
 }
@@ -29,6 +37,13 @@ export class Webhook {
       {
         action: 'new_tx'
       }
+    )).data;
+  }
+
+  public async list(): Promise<WebhookResponse[]> {
+    return <WebhookResponse[]>(await this.client.request(
+      'POST',
+      '/webhook/list'
     )).data;
   }
 }
